@@ -2,37 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 from encrypt import encrypt
 from decrypt import decrypt
-
-
-def read_file(filename):
-    try:
-        fp = open(filename, 'r', encoding='utf-8')
-        content = fp.read()
-        fp.close()
-        return content
-    except IOError:
-        print("Open file failed!")
-        return False
-
-
-def str_to_bit(content):
-    bits = ''
-    for i in content:
-        asc2i = bin(ord(i))[2:]
-        asc2i = asc2i.rjust(8, '0')
-        bits = bits + asc2i
-    return bits
-
-
-def write_file(path, content, name):
-    try:
-        file = open(f'{path}\\{name}.txt', 'w', encoding='utf-8')
-        file.write(content)
-        file.close()
-        return True
-    except IOError:
-        print("Error")
-        return False
+from utilities import read_file, write_file, str_to_bit, bit_to_str
 
 
 def encrypt_part():
@@ -52,13 +22,8 @@ def decrypt_part():
     save_path = filedialog.askdirectory(title="请选择保存解密内容的位置")
     encrypted_message = read_file(encrypted_filename)
     key_message = read_file(key_filename)
-    groups = int(len(encrypted_message) / 16)
-    decrypted_message = ''
-    for i in range(groups):
-        cur_hex = encrypted_message[i * 16:i * 16 + 16:1]
-        cur_int = int(cur_hex, 16)
-        cur_bits = bin(cur_int)[2:].rjust(64, '0')
-        decrypted_message = decrypted_message + decrypt(cur_bits, key_message)
+    decrypted_message = decrypt(encrypted_message, key_message)
+    decrypted_message = bit_to_str(decrypted_message)
     write_file(save_path, decrypted_message, 'decrypted')
     return decrypted_message
 
