@@ -31,7 +31,7 @@ def read_file(filename):
         fp.close()
         return content
     except IOError:
-        print("Open file failed!")
+        print("Read failed!")
         return False
 
 
@@ -42,5 +42,33 @@ def write_file(path, content):
         file.close()
         return True
     except IOError:
-        print("Error")
+        print("Write failed")
         return False
+
+
+def xor(text_1, text_2) -> str:
+    # 异或
+    length = len(text_1)
+    result = ''
+    for i in range(length):
+        if text_1[i] == text_2[i]:
+            result = result + '0'
+        else:
+            result = result + '1'
+    return result
+
+
+def permutation(origin_text, permutation_table) -> str:
+    # 用于位置换运算
+    result_text = ''
+    for i in permutation_table:
+        result_text = result_text + origin_text[int(i) - 1]
+    return result_text
+
+
+def divide(origin) -> tuple[str, str]:
+    total_length = len(origin)
+    half_length = int(total_length / 2)
+    L = origin[0:half_length:1]
+    R = origin[half_length:total_length:1]
+    return L, R

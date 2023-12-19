@@ -1,12 +1,5 @@
 import random
-
-
-def permutation(origin_text, permutation_table) -> str:
-    # 用于位置换运算
-    result_text = ''
-    for i in permutation_table:
-        result_text = result_text + origin_text[int(i) - 1]
-    return result_text
+from utilities import xor, permutation, divide
 
 
 def IP_Cipher(plaintext) -> str:
@@ -39,14 +32,6 @@ def IP_Decipher(IP_text) -> str:
     ]
     plaintext = permutation(IP_text, de_ip_table)
     return plaintext
-
-
-def divide(key_origin) -> tuple[str, str]:
-    total_length = len(key_origin)
-    half_length = int(total_length / 2)
-    L = key_origin[0:half_length:1]
-    R = key_origin[half_length:total_length:1]
-    return L, R
 
 
 def PC_1_Cipher(plaintext) -> str:
@@ -165,18 +150,6 @@ def extend(text) -> str:
     ]
     extend_text = permutation(text, extend_table)
     return extend_text
-
-
-def xor(text_1, text_2) -> str:
-    # 异或
-    length = len(text_1)
-    result = ''
-    for i in range(length):
-        if text_1[i] == text_2[i]:
-            result = result + '0'
-        else:
-            result = result + '1'
-    return result
 
 
 def S_change(text_48) -> str:

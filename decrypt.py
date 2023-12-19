@@ -1,4 +1,5 @@
-from encrypt import IP_Decipher, IP_Cipher, divide, PC_1_Cipher, get_K, extend, xor, S_change, P_Cipher
+from encrypt import IP_Decipher, IP_Cipher, PC_1_Cipher, get_K, extend, S_change, P_Cipher
+from utilities import xor, divide
 
 
 def decrypt(encrypted_text, key):
