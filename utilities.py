@@ -35,9 +35,9 @@ def read_file(filename):
         return False
 
 
-def write_file(path, content, name):
+def write_file(path, content):
     try:
-        file = open(f'{path}\\{name}.txt', 'w', encoding='utf-8')
+        file = open(f'{path}', 'w', encoding='utf-8')
         file.write(content)
         file.close()
         return True
