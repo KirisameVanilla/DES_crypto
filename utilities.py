@@ -72,3 +72,10 @@ def divide(origin) -> tuple[str, str]:
     L = origin[0:half_length:1]
     R = origin[half_length:total_length:1]
     return L, R
+
+
+def calc_IP_Decrypt_table(IP_table) -> list:
+    # For users to personalize their IP_table
+    index_mapping = {value: index for index, value in enumerate(IP_table, start=1)}
+    ip_inverse_table = [index_mapping[i] for i in range(1, len(IP_table) + 1)]
+    return ip_inverse_table
